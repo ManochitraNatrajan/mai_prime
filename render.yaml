@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: kcn-attendance-api
+    name: mai-prime-api
     env: node
     buildCommand: npm run build
     startCommand: npm start
