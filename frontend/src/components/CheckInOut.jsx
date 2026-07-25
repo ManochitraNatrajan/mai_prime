@@ -12,7 +12,6 @@ const CheckInOut = ({ employees }) => {
   const [submitting, setSubmitting] = useState(false);
   const [location, setLocation] = useState(null);
   const [time, setTime] = useState(new Date().toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata', hour12: true, hour: '2-digit', minute:'2-digit', second:'2-digit' }));
-  const [isPastSix, setIsPastSix] = useState(false);
   const [isBefore855, setIsBefore855] = useState(false);
   
   const videoRef = useRef(null);
@@ -27,7 +26,6 @@ const CheckInOut = ({ employees }) => {
       setTime(now.toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata', hour12: true, hour: '2-digit', minute:'2-digit', second:'2-digit' }));
       
       const istTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
-      setIsPastSix(istTime.getHours() >= 18);
       const hours = istTime.getHours();
       const minutes = istTime.getMinutes();
       setIsBefore855(hours < 8 || (hours === 8 && minutes < 55));
@@ -164,20 +162,9 @@ const CheckInOut = ({ employees }) => {
 
         <div className="flex-col gap-4">
           {!isCheckedIn && !isCheckedOut && (
-            isPastSix ? (
-              <div className="flex-col gap-2">
-                <button className="btn btn-primary" style={{ fontSize: '1.2rem', padding: '20px', borderRadius: '16px', opacity: 0.5 }} disabled={true}>
-                  CHECK IN CLOSED
-                </button>
-                <div style={{ background: '#FEF2F2', border: '1px solid #F87171', padding: '16px', borderRadius: '16px', color: '#991B1B', fontWeight: '600', fontSize: '1.1rem' }}>
-                  Absent for today
-                </div>
-              </div>
-            ) : (
               <button className="btn btn-primary" style={{ fontSize: '1.2rem', padding: '20px', borderRadius: '16px', textTransform: 'uppercase', letterSpacing: '1px' }} onClick={() => handleAction('check-in')} disabled={submitting || isBefore855}>
                 {isBefore855 ? 'CHECK IN OPENS 8:55 AM' : (submitting ? 'Processing...' : 'CONFIRM CHECK IN')}
               </button>
-            )
           )}
 
           {isCheckedIn && (
@@ -189,7 +176,7 @@ const CheckInOut = ({ employees }) => {
           {isCheckedOut && (
             <div style={{ background: '#ECFDF5', border: '1px solid #A7F3D0', padding: '24px', borderRadius: '16px', color: 'var(--primary-dark)', fontWeight: '600', fontSize: '1.1rem' }}>
               <CheckCircle2 size={32} style={{ margin: '0 auto 12px' }} />
-              Completed attendance for today
+              ATTENDANCE ALREADY MARKED FOR TODAY
             </div>
           )}
         </div>

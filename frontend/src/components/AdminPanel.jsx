@@ -95,10 +95,8 @@ const AdminPanel = ({ user }) => {
     }
   };
 
-  const isPastSix = new Date().getHours() >= 18;
   const isCheckedIn = todayRecord && !todayRecord.checkOutTime;
   const isCheckedOut = todayRecord && todayRecord.checkOutTime;
-  const isAbsent = !todayRecord && isPastSix;
 
   const calculateSalary = (emp, targetMonth) => {
     const empRecords = history.filter(h => h.employeeId === emp.employeeId && h.date.startsWith(targetMonth));
@@ -238,15 +236,10 @@ const AdminPanel = ({ user }) => {
                 <p className="text-muted" style={{ fontSize: '0.9rem' }}>Verify your presence for <strong>{new Date().toLocaleDateString('en-US', { timeZone: 'Asia/Kolkata', weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}</strong></p>
               </div>
               <div style={{ display: 'flex', gap: '12px', width: '100%', justifyContent: 'flex-start' }}>
-                {!isCheckedIn && !isCheckedOut && !isPastSix && (
+                {!isCheckedIn && !isCheckedOut && (
                   <button className="btn" style={{ backgroundColor: 'var(--success)', color: 'white', width: 'auto', padding: '16px 24px', fontSize: '1.1rem' }} onClick={() => handleAdminCheck('check-in')}>
                     <Clock size={20} style={{ marginRight: '8px' }}/> CHECK IN NOW
                   </button>
-                )}
-                {isAbsent && (
-                  <div style={{ color: 'var(--danger)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1.1rem' }}>
-                    Check-in closed. Marked Absent.
-                  </div>
                 )}
                 {isCheckedIn && (
                   <button className="btn" style={{ backgroundColor: 'var(--success)', color: 'white', width: 'auto', padding: '16px 24px', fontSize: '1.1rem' }} onClick={() => handleAdminCheck('check-out')}>
@@ -255,7 +248,7 @@ const AdminPanel = ({ user }) => {
                 )}
                 {isCheckedOut && (
                   <div style={{ color: 'var(--success)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1.1rem' }}>
-                    <CheckCircle size={24} /> Hours completed for today
+                    <CheckCircle size={24} /> Attendance already marked for today
                   </div>
                 )}
               </div>
@@ -371,7 +364,7 @@ const AdminPanel = ({ user }) => {
                   </div>
                   <div className="input-group">
                     <label>Email Address</label>
-                    <input required type="email" value={newEmp.email} onChange={e => setNewEmp({...newEmp, email: e.target.value})} placeholder="john@kcn.com" />
+                    <input required type="email" value={newEmp.email} onChange={e => setNewEmp({...newEmp, email: e.target.value})} placeholder="john@maiprime.com" />
                   </div>
                   <div className="input-group">
                     <label>Initial Password</label>

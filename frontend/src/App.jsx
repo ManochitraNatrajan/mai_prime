@@ -36,8 +36,8 @@ function App() {
         gap: '8px'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <img src="/logo.png" alt="KCN" style={{ height: '40px', objectFit: 'contain' }} onError={(e) => e.target.style.display = 'none'} />
-          <h1 style={{ margin: 0, fontSize: '1.25rem', color: 'white', letterSpacing: '-0.5px' }}>KCN Attendance</h1>
+          <img src="/logo.png" alt="Mai Prime" style={{ height: '40px', objectFit: 'contain' }} onError={(e) => e.target.style.display = 'none'} />
+          <h1 style={{ margin: 0, fontSize: '1.25rem', color: 'white', letterSpacing: '-0.5px' }}>Mai Prime Attendance</h1>
         </div>
         {user && (
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>

@@ -28,7 +28,7 @@ const Login = ({ onLogin }) => {
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, var(--primary), var(--secondary))', padding: 'var(--mobile-padding)', minHeight: 'calc(100vh - 64px)' }}>
       <div className="card" style={{ width: '100%', maxWidth: '400px', padding: '32px 24px', background: 'white', borderRadius: '24px', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' }}>
         <div style={{ textAlign: 'center', margin: '0 0 24px 0' }}>
-          <img src="/logo.png" alt="KCN Logo" style={{ height: '80px', marginBottom: '16px', objectFit: 'contain' }} onError={(e) => { e.target.style.display = 'none'; }} />
+          <img src="/logo.png" alt="Mai Prime Logo" style={{ height: '80px', marginBottom: '16px', objectFit: 'contain' }} onError={(e) => { e.target.style.display = 'none'; }} />
           <h2 style={{ fontSize: '1.75rem', color: 'var(--text-main)', marginBottom: '8px', letterSpacing: '-0.5px' }}>Member Portal</h2>
           <p className="text-muted" style={{ fontWeight: '500', fontSize: '0.9rem' }}>Sign in to securely log your attendance</p>
         </div>

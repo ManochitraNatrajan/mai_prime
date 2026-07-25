@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --primary: #F87171; /* Light Red */
-  --primary-dark: #DC2626; /* Deep Red */
-  --secondary: #FBBF24; /* Golden Yellow */
-  --secondary-dark: #D97706; /* Dark Gold / Amber */
+  --primary: #0056b3; /* Deep Blue */
+  --primary-dark: #003d82; /* Darker Blue */
+  --secondary: #FFC107; /* Yellow */
+  --secondary-dark: #e0a800; /* Darker Yellow */
   --bg-color: #F8FAFC; /* Off-White */
   --card-bg: #FFFFFF; /* Clean White */
   --text-main: #0F172A;
