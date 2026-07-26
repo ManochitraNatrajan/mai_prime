@@ -84,6 +84,7 @@ app.post('/api/login', async (req, res) => {
   try {
     const { email, password, employeeId } = req.body;
     // Database matching mimicking previous case logic
+    console.log('Login attempt:', email, password, employeeId);
     const user = await User.findOne({
       email: new RegExp(`^${email}$`, 'i'),
       password: password,
@@ -283,7 +284,7 @@ mongoose.connect(MONGO_URI)
         name: 'Harrish',
         email: 'harrishn052@gmail.com',
         password: 'Harrish123',
-        employeeId: 'KCN_SLM'
+        employeeId: 'MAIPRIME_SLM'
       });
       console.log('Default admin created in DB');
     }

@@ -7,18 +7,18 @@ import './index.css';
 
 function App() {
   const [user, setUser] = useState(() => {
-    const saved = localStorage.getItem('kcn_user');
+    const saved = localStorage.getItem('maiprime_user');
     return saved ? JSON.parse(saved) : null;
   });
 
   const handleLogin = (userData) => {
     setUser(userData);
-    localStorage.setItem('kcn_user', JSON.stringify(userData));
+    localStorage.setItem('maiprime_user', JSON.stringify(userData));
   };
 
   const handleLogout = () => {
     setUser(null);
-    localStorage.removeItem('kcn_user');
+    localStorage.removeItem('maiprime_user');
   };
 
 

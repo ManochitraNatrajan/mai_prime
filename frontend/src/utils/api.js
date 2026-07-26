@@ -9,7 +9,7 @@ export const api = {
     } catch (err) {
       console.warn(`Offline mode for GET ${endpoint}`);
       if (endpoint === '/employees') {
-        return JSON.parse(localStorage.getItem('kcn_employees') || '[]');
+        return JSON.parse(localStorage.getItem('maiprime_employees') || '[]');
       }
       return [];
     }
@@ -18,9 +18,9 @@ export const api = {
   async post(endpoint, data) {
     if (!navigator.onLine) {
       if (endpoint === '/attendance') {
-        const queue = JSON.parse(localStorage.getItem('kcn_sync_queue') || '[]');
+        const queue = JSON.parse(localStorage.getItem('maiprime_sync_queue') || '[]');
         queue.push(data);
-        localStorage.setItem('kcn_sync_queue', JSON.stringify(queue));
+        localStorage.setItem('maiprime_sync_queue', JSON.stringify(queue));
         return { success: true, offline: true, ...data };
       }
       throw new Error('Offline - action not supported');
@@ -66,7 +66,7 @@ export const api = {
 
   async syncOffline() {
     if (!navigator.onLine) return;
-    const queue = JSON.parse(localStorage.getItem('kcn_sync_queue') || '[]');
+    const queue = JSON.parse(localStorage.getItem('maiprime_sync_queue') || '[]');
     if (queue.length > 0) {
       try {
         await fetch(`${API_URL}/attendance/sync`, {
@@ -74,7 +74,7 @@ export const api = {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(queue)
         });
-        localStorage.setItem('kcn_sync_queue', '[]');
+        localStorage.setItem('maiprime_sync_queue', '[]');
       } catch (err) {
         console.error('Sync failed', err);
       }

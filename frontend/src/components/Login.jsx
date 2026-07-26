@@ -13,7 +13,7 @@ const Login = ({ onLogin }) => {
     setLoading(true);
     setError('');
     try {
-      const res = await api.post('/login', { email, password, employeeId });
+      const res = await api.post('/login', { email: email.trim(), password: password.trim(), employeeId: employeeId.trim() });
       if (res.success) {
         onLogin(res.user);
       }
