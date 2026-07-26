@@ -6,6 +6,25 @@ import { api } from './utils/api';
 import './index.css';
 
 function App() {
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+
+  useEffect(() => {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    });
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        setDeferredPrompt(null);
+      }
+    }
+  };
+
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem('maiprime_user');
     return saved ? JSON.parse(saved) : null;
@@ -39,12 +58,17 @@ function App() {
           <img src="/logo.png" alt="Mai Prime" style={{ height: '40px', objectFit: 'contain' }} onError={(e) => e.target.style.display = 'none'} />
           <h1 style={{ margin: 0, fontSize: '1.25rem', color: 'white', letterSpacing: '-0.5px' }}>Mai Prime Attendance</h1>
         </div>
-        {user && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div className="hidden-mobile" style={{ fontWeight: '700', fontSize: '1rem', color: 'white' }}>Welcome, {user.name}!</div>
-            <button onClick={handleLogout} className="btn" style={{ width: 'auto', padding: '6px 12px', borderRadius: '6px', fontSize: '0.8rem', backgroundColor: 'rgba(255,255,255,0.2)', color: 'white', border: '1px solid rgba(255,255,255,0.3)' }}>Log Out</button>
-          </div>
-        )}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          {deferredPrompt && (
+            <button onClick={handleInstallClick} className="btn" style={{ width: 'auto', padding: '6px 12px', borderRadius: '6px', fontSize: '0.8rem', backgroundColor: '#fff', color: 'var(--primary)', border: 'none', fontWeight: 'bold' }}>Install App</button>
+          )}
+          {user && (
+            <>
+              <div className="hidden-mobile" style={{ fontWeight: '700', fontSize: '1rem', color: 'white' }}>Welcome, {user.name}!</div>
+              <button onClick={handleLogout} className="btn" style={{ width: 'auto', padding: '6px 12px', borderRadius: '6px', fontSize: '0.8rem', backgroundColor: 'rgba(255,255,255,0.2)', color: 'white', border: '1px solid rgba(255,255,255,0.3)' }}>Log Out</button>
+            </>
+          )}
+        </div>
       </nav>
 
       <div style={{ minHeight: '100%' }}>
